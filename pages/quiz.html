@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Election Quiz — ElectIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="../css/quiz.css"/>
+</head>
+<body>
+  <canvas id="ballotCanvas"></canvas>
+
+  <nav class="navbar">
+    <div class="nav-logo" onclick="window.location='../index.html'">
+      <span class="logo-icon">🗳️</span><span class="logo-text">ElectIQ</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="quiz.html" class="active">Quiz</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <button class="chat-toggle-btn" onclick="toggleChat()">💬 Ask AI</button>
+  </nav>
+
+  <!-- QUIZ START SCREEN -->
+  <div id="quizStart" class="quiz-screen">
+    <div class="quiz-start-inner">
+      <div class="quiz-badge">🧠 Knowledge Test</div>
+      <h1 class="quiz-title">Election<br/><em>IQ Quiz</em></h1>
+      <p class="quiz-desc">Test your knowledge of elections, democracy, and the voting process. 15 questions · Timed · Scored</p>
+      <div class="quiz-info-row">
+        <div class="quiz-info-item"><span>📝</span><span>15 Questions</span></div>
+        <div class="quiz-info-item"><span>⏱️</span><span>20 Seconds Each</span></div>
+        <div class="quiz-info-item"><span>🏆</span><span>Score & Grade</span></div>
+      </div>
+      <div class="difficulty-select">
+        <div class="diff-label">Select Difficulty:</div>
+        <div class="diff-btns">
+          <button class="diff-btn active" data-diff="easy">Beginner</button>
+          <button class="diff-btn" data-diff="medium">Intermediate</button>
+          <button class="diff-btn" data-diff="hard">Expert</button>
+        </div>
+      </div>
+      <button class="btn btn-primary quiz-start-btn" onclick="startQuiz()">Start Quiz →</button>
+    </div>
+  </div>
+
+  <!-- QUIZ ACTIVE SCREEN -->
+  <div id="quizActive" class="quiz-screen hidden">
+    <div class="quiz-active-inner">
+      <div class="quiz-top-bar">
+        <div class="quiz-progress-text" id="progressText">Question 1 of 15</div>
+        <div class="quiz-score-display">Score: <span id="liveScore">0</span></div>
+        <div class="quiz-timer" id="quizTimer">20</div>
+      </div>
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progressFill"></div>
+      </div>
+      <div class="question-card" id="questionCard">
+        <div class="q-category" id="qCategory">General</div>
+        <h2 class="q-text" id="qText">Question loads here...</h2>
+        <div class="options-grid" id="optionsGrid"></div>
+      </div>
+      <div class="quiz-nav">
+        <button class="quiz-skip-btn" onclick="skipQuestion()">Skip →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ RESULT SCREEN -->
+  <div id="quizResult" class="quiz-screen hidden">
+    <div class="quiz-result-inner">
+      <div class="result-emoji" id="resultEmoji">🏆</div>
+      <h2 class="result-grade" id="resultGrade">Excellent!</h2>
+      <div class="result-score-ring">
+        <svg viewBox="0 0 120 120" class="score-ring-svg">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="8"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#c9a84c" stroke-width="8"
+            stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round"
+            id="scoreRingCircle" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="score-ring-text">
+          <span class="score-num" id="finalScore">0</span>
+          <span class="score-denom">/15</span>
+        </div>
+      </div>
+      <p class="result-message" id="resultMessage">Here's how you did!</p>
+      <div class="result-breakdown" id="resultBreakdown"></div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="restartQuiz()">Play Again</button>
+        <a href="glossary.html" class="btn btn-ghost">Study Glossary →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="chatbot-overlay" id="chatOverlay" onclick="toggleChat()"></div>
+  <div class="chatbot-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🗳️</div>
+        <div><div class="chat-name">ElectIQ AI</div>
+        <div class="chat-status"><span class="status-dot"></span> Online</div></div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble ai">
+        <div class="bubble-avatar">🗳️</div>
+        <div class="bubble-content"><p>Stuck on a question? Ask me anything about elections!</p></div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea id="chatInput" placeholder="Ask about a quiz question..." rows="1"
+          onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-footer-note">Powered by Groq · llama3-8b-8192</div>
+    </div>
+  </div>
+
+  <script src="../main.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/quiz.js"></script>
+</body>
+</html>

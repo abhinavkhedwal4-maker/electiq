@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Election News — ElectIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="../css/news.css"/>
+</head>
+<body>
+  <canvas id="ballotCanvas"></canvas>
+
+  <nav class="navbar">
+    <div class="nav-logo" onclick="window.location='../index.html'">
+      <span class="logo-icon">🗳️</span><span class="logo-text">ElectIQ</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="news.html" class="active">News</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <button class="chat-toggle-btn" onclick="toggleChat()">💬 Ask AI</button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="section-label">Real-Time Updates</div>
+    <h1>Election News</h1>
+    <p>Stay informed with the latest election news and political developments from around the world.</p>
+  </div>
+
+  <div class="page-content">
+    <!-- FILTER TABS -->
+    <div class="news-filters">
+      <button class="news-filter-btn active" data-cat="all">All</button>
+      <button class="news-filter-btn" data-cat="india">🇮🇳 India</button>
+      <button class="news-filter-btn" data-cat="world">🌐 World</button>
+      <button class="news-filter-btn" data-cat="policy">📜 Policy</button>
+      <button class="news-filter-btn" data-cat="results">📊 Results</button>
+    </div>
+
+    <!-- LOADING STATE -->
+    <div class="news-loading" id="newsLoading">
+      <div class="loading-spinner"></div>
+      <p>Fetching latest election news...</p>
+    </div>
+
+    <!-- NEWS GRID -->
+    <div class="news-grid" id="newsGrid"></div>
+
+    <!-- TICKER -->
+    <div class="news-ticker">
+      <div class="ticker-label">🔴 LIVE</div>
+      <div class="ticker-track" id="tickerTrack">
+        <div class="ticker-items" id="tickerItems"></div>
+      </div>
+    </div>
+
+    <!-- ELECTION CALENDAR -->
+    <div class="election-calendar">
+      <h2 class="section-title">Upcoming Elections 2025–2026</h2>
+      <div class="calendar-list" id="calendarList"></div>
+    </div>
+
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="chatbot-overlay" id="chatOverlay" onclick="toggleChat()"></div>
+  <div class="chatbot-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🗳️</div>
+        <div><div class="chat-name">ElectIQ AI</div>
+        <div class="chat-status"><span class="status-dot"></span> Online</div></div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble ai">
+        <div class="bubble-avatar">🗳️</div>
+        <div class="bubble-content"><p>Ask me about any election news or political developments!</p></div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea id="chatInput" placeholder="Ask about election news..." rows="1"
+          onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-footer-note">Powered by Groq · llama3-8b-8192</div>
+    </div>
+  </div>
+
+  <script src="../main.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/news.js"></script>
+</body>
+</html>

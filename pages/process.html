@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Election Process — ElectIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="../css/process.css"/>
+</head>
+<body>
+  <canvas id="ballotCanvas"></canvas>
+
+  <nav class="navbar">
+    <div class="nav-logo" onclick="window.location='../index.html'">
+      <span class="logo-icon">🗳️</span>
+      <span class="logo-text">ElectIQ</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="process.html" class="active">Process</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <button class="chat-toggle-btn" onclick="toggleChat()">💬 Ask AI</button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="section-label">Step by Step</div>
+    <h1>How Elections Work</h1>
+    <p>A complete visual guide through every phase of a democratic election — from announcement to final results.</p>
+  </div>
+
+  <div class="page-content">
+
+    <!-- PHASE SELECTOR -->
+    <div class="phase-selector">
+      <button class="phase-btn active" data-phase="all">All Phases</button>
+      <button class="phase-btn" data-phase="pre">Pre-Election</button>
+      <button class="phase-btn" data-phase="during">Voting Day</button>
+      <button class="phase-btn" data-phase="post">Post-Election</button>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+
+      <div class="timeline-item" data-phase="pre">
+        <div class="timeline-connector">
+          <div class="timeline-node">1</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag pre">Pre-Election</div>
+          <h3>📣 Election Announcement</h3>
+          <p>The Election Commission officially announces the election schedule, including dates for nominations, voting, and counting. This triggers the <strong>Model Code of Conduct (MCC)</strong> — a set of rules that all political parties and candidates must follow during the campaign period.</p>
+          <div class="timeline-detail">
+            <strong>Key Facts:</strong>
+            <ul>
+              <li>In India, the Election Commission of India (ECI) announces schedules</li>
+              <li>MCC comes into force immediately upon announcement</li>
+              <li>Government cannot announce new welfare schemes during this period</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ Typically 4–6 weeks before voting</div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-phase="pre">
+        <div class="timeline-connector">
+          <div class="timeline-node">2</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag pre">Pre-Election</div>
+          <h3>📝 Voter Registration & Roll Updates</h3>
+          <p>Citizens must be registered on the <strong>Electoral Roll</strong> to vote. Authorities update voter lists, remove deceased voters, add new eligible voters (age 18+), and allow corrections of existing entries.</p>
+          <div class="timeline-detail">
+            <strong>How to Register (India):</strong>
+            <ul>
+              <li>Apply online via voters.eci.gov.in or Form 6</li>
+              <li>Provide proof of age and residence</li>
+              <li>Receive Voter ID Card (EPIC)</li>
+              <li>Rolls are published for public inspection</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ Ongoing, with special drives before elections</div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-phase="pre">
+        <div class="timeline-connector">
+          <div class="timeline-node">3</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag pre">Pre-Election</div>
+          <h3>🙋 Nomination of Candidates</h3>
+          <p>Candidates file their nomination papers within the specified window. Each nomination must be accompanied by a <strong>security deposit</strong> and signed by a certain number of registered voters (proposers). Nominations are then scrutinized for validity.</p>
+          <div class="timeline-detail">
+            <strong>Requirements in India:</strong>
+            <ul>
+              <li>Security deposit: ₹25,000 for Lok Sabha, ₹10,000 for State Assemblies</li>
+              <li>Must be a citizen of India aged 25+ (Lok Sabha)</li>
+              <li>Cannot have criminal convictions of 2+ years</li>
+              <li>Must file criminal & financial affidavits</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ 2–3 weeks before voting</div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-phase="pre">
+        <div class="timeline-connector">
+          <div class="timeline-node">4</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag pre">Pre-Election</div>
+          <h3>📢 Election Campaign</h3>
+          <p>Candidates and parties conduct public rallies, door-to-door canvassing, advertisements, and debates to seek votes. Campaigns must follow strict expenditure limits and content rules set by the Election Commission.</p>
+          <div class="timeline-detail">
+            <strong>Campaign Rules:</strong>
+            <ul>
+              <li>No campaigning 48 hours before polling (silence period)</li>
+              <li>Expense limits: ₹95 lakh per Lok Sabha candidate</li>
+              <li>Paid political ads must be pre-certified by MCC committee</li>
+              <li>Hate speech, bribery of voters is prohibited</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ Weeks 1–3 of election period</div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-phase="during">
+        <div class="timeline-connector">
+          <div class="timeline-node">5</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag during">Voting Day</div>
+          <h3>🗳️ Polling / Voting Day</h3>
+          <p>Eligible voters visit their designated polling booths and cast their votes. In India, votes are cast using <strong>Electronic Voting Machines (EVMs)</strong> which are tamper-proof. A <strong>VVPAT</strong> (Voter Verifiable Paper Audit Trail) slip is generated for verification.</p>
+          <div class="timeline-detail">
+            <strong>Voting Process (India):</strong>
+            <ul>
+              <li>Bring valid photo ID (Voter ID, Aadhaar, Passport, etc.)</li>
+              <li>Name verified against electoral roll</li>
+              <li>Indelible ink applied to left index finger</li>
+              <li>Press candidate's button on EVM</li>
+              <li>VVPAT slip visible for 7 seconds for verification</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ Polling hours: 7 AM – 6 PM generally</div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-phase="post">
+        <div class="timeline-connector">
+          <div class="timeline-node">6</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag post">Post-Election</div>
+          <h3>🔢 Vote Counting</h3>
+          <p>On counting day, EVM units are brought to designated counting centres. <strong>Counting Agents</strong> from each candidate observe the count. Results are declared round by round, and the candidate with the highest votes (First Past The Post) wins.</p>
+          <div class="timeline-detail">
+            <strong>How Counting Works:</strong>
+            <ul>
+              <li>Postal ballots counted first</li>
+              <li>EVMs from each polling station counted in rounds</li>
+              <li>Running tally displayed publicly and on ECI website</li>
+              <li>Returning Officer declares winner officially</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ Begins at 8 AM on counting day</div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-phase="post">
+        <div class="timeline-connector">
+          <div class="timeline-node">7</div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-card">
+          <div class="phase-tag post">Post-Election</div>
+          <h3>🏛️ Formation of Government</h3>
+          <p>After results, the party or alliance with a majority forms the government. The leader is sworn in as Prime Minister / Chief Minister. The President or Governor plays a constitutional role in the transfer of power.</p>
+          <div class="timeline-detail">
+            <strong>Key Steps:</strong>
+            <ul>
+              <li>Party/Alliance with 272+ seats (Lok Sabha) gets majority</li>
+              <li>President invites majority leader to form government</li>
+              <li>Cabinet is constituted and sworn in</li>
+              <li>New government presents Budget within 6 months</li>
+            </ul>
+          </div>
+          <div class="timeline-duration">⏱️ Within 2–3 weeks of results</div>
+        </div>
+      </div>
+
+    </div><!-- end timeline -->
+
+    <!-- EVM INFO BOX -->
+    <div class="info-box">
+      <div class="info-box-header">
+        <span>⚡</span>
+        <h3>Understanding EVMs & VVPATs</h3>
+      </div>
+      <div class="info-box-grid">
+        <div class="info-item">
+          <h4>What is an EVM?</h4>
+          <p>An Electronic Voting Machine is a standalone, battery-operated device that records votes electronically. It has two units: a Control Unit (with officials) and a Ballot Unit (with voters).</p>
+        </div>
+        <div class="info-item">
+          <h4>What is VVPAT?</h4>
+          <p>Voter Verifiable Paper Audit Trail is a machine connected to EVM that prints a paper slip showing the candidate and symbol voted for. The voter can verify it through a transparent window for 7 seconds.</p>
+        </div>
+        <div class="info-item">
+          <h4>Is EVM Hackable?</h4>
+          <p>EVMs are standalone machines — not connected to internet or any network. They are programmed once and sealed. Supreme Court of India has upheld their reliability multiple times.</p>
+        </div>
+        <div class="info-item">
+          <h4>NOTA Option</h4>
+          <p>Since 2013, voters can press NOTA (None Of The Above) if they disapprove of all candidates. This is a constitutional right under the right to expression.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK COMPARISON -->
+    <div class="comparison-section">
+      <h2 class="section-title">Electoral Systems Worldwide</h2>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <div class="cc-flag">🇮🇳</div>
+          <h4>India</h4>
+          <p>First Past The Post (FPTP) system. Parliamentary Democracy. 543 Lok Sabha seats. Largest democracy by voters.</p>
+        </div>
+        <div class="comparison-card">
+          <div class="cc-flag">🇺🇸</div>
+          <h4>USA</h4>
+          <p>Electoral College system. Presidential Democracy. Each state has electors. 270 electoral votes needed to win.</p>
+        </div>
+        <div class="comparison-card">
+          <div class="cc-flag">🇬🇧</div>
+          <h4>UK</h4>
+          <p>First Past The Post. Westminster Parliamentary system. 650 constituencies. Paper ballot voting.</p>
+        </div>
+        <div class="comparison-card">
+          <div class="cc-flag">🇩🇪</div>
+          <h4>Germany</h4>
+          <p>Mixed-Member Proportional system. Two votes per voter — for candidate and party. Ensures proportional representation.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end page-content -->
+
+  <!-- Chat Panel -->
+  <div class="chatbot-overlay" id="chatOverlay" onclick="toggleChat()"></div>
+  <div class="chatbot-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🗳️</div>
+        <div>
+          <div class="chat-name">ElectIQ AI</div>
+          <div class="chat-status"><span class="status-dot"></span> Online</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble ai">
+        <div class="bubble-avatar">🗳️</div>
+        <div class="bubble-content">
+          <p>Ask me anything about the election process!</p>
+        </div>
+      </div>
+      <div class="chat-suggestions">
+        <button onclick="sendSuggestion('Explain the Model Code of Conduct')">What is MCC?</button>
+        <button onclick="sendSuggestion('How does VVPAT work?')">How does VVPAT work?</button>
+        <button onclick="sendSuggestion('What is NOTA in elections?')">What is NOTA?</button>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea id="chatInput" placeholder="Ask about elections..." rows="1"
+          onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-footer-note">Powered by Groq · llama-3.3-70b-versatile</div>
+    </div>
+  </div>
+
+  <script src="../main.js"></script>
+  <script src="../js/chatbot.js"></script>
+
+  <!-- ✅ Phase filter fix -->
+  <script>
+    document.querySelectorAll('.phase-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Show/hide timeline items
+        const phase = btn.dataset.phase;
+        document.querySelectorAll('.timeline-item').forEach(item => {
+          if (phase === 'all' || item.dataset.phase === phase) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

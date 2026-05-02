@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ElectIQ — Understand Every Vote</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- BALLOT RAIN CANVAS -->
+  <canvas id="ballotCanvas"></canvas>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">🗳️</span>
+      <span class="logo-text">ElectIQ</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="pages/process.html">Process</a></li>
+      <li><a href="pages/news.html">News</a></li>
+      <li><a href="pages/quiz.html">Quiz</a></li>
+      <li><a href="pages/glossary.html">Glossary</a></li>
+    </ul>
+    <button class="chat-toggle-btn" onclick="toggleChat()">
+      <span class="chat-btn-icon">💬</span> Ask ElectIQ AI
+    </button>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-badge">Powered by AI · Built for Democracy</div>
+    <h1 class="hero-title">
+      <span class="title-line">Every Vote.</span>
+      <span class="title-line accent">Every Voice.</span>
+      <span class="title-line">Explained.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Your intelligent guide to understanding elections — from casting a ballot to counting every last vote. Interactive, real-time, and built for everyone.
+    </p>
+    <div class="hero-cta">
+      <a href="pages/process.html" class="btn btn-primary">Explore the Process</a>
+      <a href="pages/quiz.html" class="btn btn-ghost">Take the Quiz →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">7</span>
+        <span class="stat-label">Election Phases</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Glossary Terms</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">AI</span>
+        <span class="stat-label">Powered Chatbot</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="features" id="features">
+    <div class="section-label">What You Can Do</div>
+    <h2 class="section-title">Everything about Elections,<br/>In One Place</h2>
+    <div class="cards-grid">
+      <a href="pages/process.html" class="feature-card" data-color="blue">
+        <div class="card-icon">📋</div>
+        <h3>Election Process</h3>
+        <p>Step-by-step visual guide through every phase of an election from announcement to results.</p>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="pages/news.html" class="feature-card" data-color="red">
+        <div class="card-icon">📰</div>
+        <h3>Live Election News</h3>
+        <p>Real-time updates on elections happening right now around the world.</p>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="pages/quiz.html" class="feature-card" data-color="green">
+        <div class="card-icon">🧠</div>
+        <h3>Knowledge Quiz</h3>
+        <p>Test your understanding with our timed quiz covering election fundamentals and trivia.</p>
+        <span class="card-arrow">→</span>
+      </a>
+      <a href="pages/glossary.html" class="feature-card" data-color="gold">
+        <div class="card-icon">📖</div>
+        <h3>Glossary</h3>
+        <p>Searchable dictionary of every election term you'll ever encounter, explained simply.</p>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- AI CHATBOT PANEL -->
+  <div class="chatbot-overlay" id="chatOverlay" onclick="toggleChat()"></div>
+  <div class="chatbot-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🗳️</div>
+        <div>
+          <div class="chat-name">ElectIQ AI</div>
+          <div class="chat-status"><span class="status-dot"></span> Online · Groq Powered</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble ai">
+        <div class="bubble-avatar">🗳️</div>
+        <div class="bubble-content">
+          <p>Hello! I'm <strong>ElectIQ AI</strong> — your personal guide to understanding elections.</p>
+          <p>Ask me anything about election processes, voting rights, candidates, timelines, or how democracy works!</p>
+        </div>
+      </div>
+      <div class="chat-suggestions">
+        <button onclick="sendSuggestion('How does an election work step by step?')">How does an election work?</button>
+        <button onclick="sendSuggestion('What is the Electoral College?')">What is Electoral College?</button>
+        <button onclick="sendSuggestion('How are votes counted?')">How are votes counted?</button>
+        <button onclick="sendSuggestion('What is voter registration?')">Voter registration?</button>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea 
+          id="chatInput" 
+          placeholder="Ask about elections, voting, or democracy..." 
+          rows="1"
+          onkeydown="handleChatKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-footer-note">Powered by Groq · llama3-8b-8192</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">🗳️</span>
+        <span class="logo-text">ElectIQ</span>
+        <p>Making democracy understandable for everyone.</p>
+      </div>
+      <div class="footer-links">
+        <a href="pages/process.html">Process</a>
+        <a href="pages/news.html">News</a>
+        <a href="pages/quiz.html">Quiz</a>
+        <a href="pages/glossary.html">Glossary</a>
+      </div>
+      <div class="footer-note">Built for Google Prompt War 2026 · Challenge 2</div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

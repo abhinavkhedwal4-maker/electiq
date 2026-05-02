@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Election Glossary — ElectIQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="../css/glossary.css"/>
+</head>
+<body>
+  <canvas id="ballotCanvas"></canvas>
+
+  <nav class="navbar">
+    <div class="nav-logo" onclick="window.location='../index.html'">
+      <span class="logo-icon">🗳️</span><span class="logo-text">ElectIQ</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="glossary.html" class="active">Glossary</a></li>
+    </ul>
+    <button class="chat-toggle-btn" onclick="toggleChat()">💬 Ask AI</button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="section-label">50+ Terms</div>
+    <h1>Election Glossary</h1>
+    <p>Your complete dictionary of election terminology — from Affidavit to Voter Roll, explained in plain language.</p>
+  </div>
+
+  <div class="page-content">
+    <!-- SEARCH -->
+    <div class="glossary-search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="glossarySearch" placeholder="Search any term, e.g. 'NOTA', 'EVM', 'ballot'..." oninput="filterGlossary(this.value)"/>
+      <div class="search-count" id="searchCount">55 terms</div>
+    </div>
+
+    <!-- ALPHA NAV -->
+    <div class="alpha-nav" id="alphNav"></div>
+
+    <!-- TERM CARDS -->
+    <div class="glossary-grid" id="glossaryGrid"></div>
+
+    <!-- NO RESULTS -->
+    <div class="no-results hidden" id="noResults">
+      <p>🔍 No terms found for "<span id="searchQuery"></span>"</p>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Try asking the AI assistant for this term!</p>
+    </div>
+  </div>
+
+  <!-- Chat Panel -->
+  <div class="chatbot-overlay" id="chatOverlay" onclick="toggleChat()"></div>
+  <div class="chatbot-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🗳️</div>
+        <div><div class="chat-name">ElectIQ AI</div>
+        <div class="chat-status"><span class="status-dot"></span> Online</div></div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble ai">
+        <div class="bubble-avatar">🗳️</div>
+        <div class="bubble-content"><p>Can't find a term? Ask me and I'll explain it!</p></div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea id="chatInput" placeholder="Ask me to define any election term..." rows="1"
+          onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-footer-note">Powered by Groq · llama3-8b-8192</div>
+    </div>
+  </div>
+
+  <script src="../main.js"></script>
+  <script src="../js/chatbot.js"></script>
+  <script src="../js/glossary.js"></script>
+</body>
+</html>

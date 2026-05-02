@@ -1,0 +1,169 @@
+.glossary-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.glossary-search-bar:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+}
+
+.search-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+.glossary-search-bar input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+}
+
+.glossary-search-bar input::placeholder { color: var(--text-muted); }
+
+.search-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+}
+
+.alpha-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 2.5rem;
+}
+
+.alpha-btn {
+  width: 34px; height: 34px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alpha-btn:hover,
+.alpha-btn.active {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+}
+
+.alpha-btn.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.glossary-letter-group {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.glossary-letter-group h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.glossary-letter-group::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.glossary-term-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  transition: var(--transition);
+  cursor: pointer;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.glossary-term-card:hover {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-2px);
+}
+
+.term-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.term-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.term-tag {
+  font-size: 0.65rem;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.term-tag.india { background: rgba(255,153,0,0.15); color: #ff9900; }
+.term-tag.world { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.term-tag.concept { background: rgba(201,168,76,0.15); color: var(--gold); }
+.term-tag.process { background: rgba(34,197,94,0.15); color: #4ade80; }
+
+.term-abbr {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold-muted);
+  margin-bottom: 0.5rem;
+}
+
+.term-definition {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-primary);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+}
+
+.no-results.hidden { display: none; }
