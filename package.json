@@ -1,16 +1,11 @@
 ﻿{
   "name": "electiq",
   "version": "1.0.0",
-  "description": "AI-powered Election Education Platform — Google Prompt War 2026",
-  "main": "server.local.js",
+  "description": "AI-powered Election Education Platform",
   "scripts": {
-    "start": "node server.local.js",
-    "dev": "node server.local.js"
+    "start": "node server.local.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 }
