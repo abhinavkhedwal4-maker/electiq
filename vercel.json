@@ -1,26 +1,6 @@
 ﻿{
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/chat.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "**/*.{html,css,js,json,png,jpg,svg,ico}",
-      "use": "@vercel/static",
-      "config": {
-        "excludeFiles": ["api/**", "server.js", "node_modules/**"]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/chat",
-      "dest": "/api/chat.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+  "rewrites": [
+    { "source": "/api/chat", "destination": "/api/chat.js" },
+    { "source": "/(.*)", "destination": "/" }
   ]
 }
